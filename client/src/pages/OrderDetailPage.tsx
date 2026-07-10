@@ -21,7 +21,7 @@ const OPEN_STATES = new Set([
   'out_for_delivery',
 ]);
 
-const SUPPORT_EMAIL = 'texlorerug@gmail.com';
+const SUPPORT_EMAIL = 'texlorerugs@gmail.com';
 
 export default function OrderDetailPage(): JSX.Element {
   const { orderNumber } = useParams<{ orderNumber: string }>();
@@ -278,7 +278,7 @@ function CancellationHelp({ orderNumber }: { orderNumber: string }): JSX.Element
           </div>
         </a>
         <a
-          href="tel:+910000000000"
+          href="tel:+919219087191"
           className="flex items-center gap-3 rounded-xl border border-line bg-pearl px-4 py-3 hover:border-midnight-900 transition-colors"
         >
           <span className="w-9 h-9 rounded-full bg-midnight-900/5 text-midnight-900 inline-flex items-center justify-center">

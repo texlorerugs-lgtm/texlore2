@@ -112,7 +112,7 @@ export function generateInvoicePdf(order: OrderDoc): Promise<Buffer> {
       .fillColor(BRAND.charcoal)
       .font('Helvetica')
       .fontSize(10)
-      .text('texlorerug@gmail.com', 48 + half, billTop + 30);
+      .text('texlorerugs@gmail.com', 48 + half, billTop + 30);
 
     // Items table
     const tableTop = billTop + 160;
@@ -199,7 +199,7 @@ export function generateInvoicePdf(order: OrderDoc): Promise<Buffer> {
       .font('Helvetica')
       .fontSize(9)
       .text(
-        'Thank you for shopping with Texlore. Questions? Email texlorerug@gmail.com',
+        'Thank you for shopping with Texlore. Questions? Email texlorerugs@gmail.com',
         48,
         780,
         { align: 'center', width: 499 },

@@ -32,16 +32,16 @@ export function Footer(): JSX.Element {
 
           <FooterCol title="Reach us">
             <a
-              href="mailto:texlorerug@gmail.com"
+              href="mailto:texlorerugs@gmail.com"
               className="flex items-center gap-2 text-sm text-ivory/70 hover:text-gold-500 transition-colors"
             >
-              <Mail size={14} /> texlorerug@gmail.com
+              <Mail size={14} /> texlorerugs@gmail.com
             </a>
             <a
-              href="tel:+910000000000"
+              href="tel:+919219087191"
               className="flex items-center gap-2 text-sm text-ivory/70 hover:text-gold-500 transition-colors"
             >
-              <Phone size={14} /> +91 00000 00000
+              <Phone size={14} /> +91 9219087191
             </a>
             <div className="flex items-center gap-3 pt-2">
               <SocialLink label="Instagram" href="#">

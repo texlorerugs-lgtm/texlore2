@@ -105,8 +105,8 @@ export default function ProfilePage(): JSX.Element {
           </div>
           <p className="mt-4 text-xs text-charcoal-400">
             Need to delete your account? Email us at{' '}
-            <a href="mailto:texlorerug@gmail.com" className="text-midnight-900 underline">
-              texlorerug@gmail.com
+            <a href="mailto:texlorerugs@gmail.com" className="text-midnight-900 underline">
+              texlorerugs@gmail.com
             </a>{' '}
             and we\u2019ll handle it within 48 hours.
           </p>

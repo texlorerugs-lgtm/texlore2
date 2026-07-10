@@ -72,7 +72,7 @@ functioning production deployment.
    - `SMTP_HOST=smtp.gmail.com`
    - `SMTP_PORT=587`
    - `SMTP_SECURE=false`
-   - `SMTP_USER=texlorerug@gmail.com`
+   - `SMTP_USER=texlorerugs@gmail.com`
    - `SMTP_PASS=<the 16-char app password>`
 
 ### Option B — SendGrid / Mailgun / AWS SES
@@ -92,7 +92,7 @@ emails/day.
    - `RAZORPAY_KEY_SECRET` — copy immediately (shown once)
 4. **Webhooks → Add new webhook:**
    - URL: `https://your-domain.example/api/v1/payments/webhook`
-   - Alert email: `texlorerug@gmail.com`
+   - Alert email: `texlorerugs@gmail.com`
    - Secret: generate a strong random string; put it in `RAZORPAY_WEBHOOK_SECRET`
    - Events to subscribe:
      - `payment.captured`

@@ -45,7 +45,7 @@ export function renderEmail({ title, preheader = '', bodyHtml }: BaseTemplateOpt
               <td style="background:#0B1B3A;color:#FBF7F0;padding:24px 40px;text-align:center;font-size:12px;">
                 <div style="opacity:0.7;margin-bottom:6px;">
                   Need help? Email us at
-                  <a href="mailto:texlorerug@gmail.com" style="color:#D4AF37;text-decoration:none;">texlorerug@gmail.com</a>
+                  <a href="mailto:texlorerugs@gmail.com" style="color:#D4AF37;text-decoration:none;">texlorerugs@gmail.com</a>
                 </div>
                 <div style="opacity:0.5;">© ${new Date().getFullYear()} Texlore. All rights reserved.</div>
               </td>

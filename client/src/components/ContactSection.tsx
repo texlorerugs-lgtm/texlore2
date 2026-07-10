@@ -50,7 +50,7 @@ export function ContactSection(): JSX.Element {
           </p>
           <ul className="space-y-3 text-sm text-ivory/80">
             <li className="flex items-center gap-3">
-              <Mail size={16} className="text-gold-500" /> texlorerug@gmail.com
+              <Mail size={16} className="text-gold-500" /> texlorerugs@gmail.com
             </li>
             <li className="flex items-center gap-3">
               <MessageSquare size={16} className="text-gold-500" /> Typical reply within 24 hours

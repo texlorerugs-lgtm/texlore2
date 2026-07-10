@@ -65,7 +65,7 @@ export async function cancelUserOrder(
   const o = await Order.findOne({ userId, orderNumber }).lean();
   if (!o) throw ApiError.notFound('Order not found.');
   throw ApiError.forbidden(
-    'Order cancellations are handled by our team. Please email texlorerug@gmail.com with your order number and we will confirm the cancellation and initiate a refund within 72 working hours.',
+    'Order cancellations are handled by our team. Please email texlorerugs@gmail.com with your order number and we will confirm the cancellation and initiate a refund within 72 working hours.',
   );
 }
 
