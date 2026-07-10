@@ -1,0 +1,43 @@
+version: "3.9"
+
+# Optional local dev stack — MongoDB + Mongo Express UI.
+# For production, use MongoDB Atlas (see DEPLOYMENT.md).
+#
+# Usage:
+#   docker compose -f docker-compose.dev.yml up -d
+#   # then in server/.env set:
+#   #   MONGO_URI=mongodb://texlore:texlore@localhost:27017/texlore?authSource=admin
+#
+# Stop:
+#   docker compose -f docker-compose.dev.yml down
+services:
+  mongo:
+    image: mongo:7
+    container_name: texlore-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: texlore
+      MONGO_INITDB_ROOT_PASSWORD: texlore
+    volumes:
+      - texlore_mongo_data:/data/db
+
+  # Optional web UI at http://localhost:8081 (creds admin / admin)
+  mongo-express:
+    image: mongo-express:1
+    container_name: texlore-mongo-ui
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: texlore
+      ME_CONFIG_MONGODB_ADMINPASSWORD: texlore
+      ME_CONFIG_MONGODB_URL: mongodb://texlore:texlore@mongo:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+
+volumes:
+  texlore_mongo_data:

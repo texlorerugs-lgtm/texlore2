@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-ivory text-charcoal-500 font-sans;
+    font-feature-settings: 'ss01', 'ss02', 'cv01';
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-midnight-900;
+  }
+  ::selection {
+    background: theme('colors.gold.500');
+    color: theme('colors.midnight.900');
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3
+           font-medium tracking-wide transition-all duration-300 ease-out-luxury
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500
+           focus-visible:ring-offset-2 focus-visible:ring-offset-ivory
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn bg-midnight-900 text-ivory hover:bg-midnight-800 shadow-card
+           hover:-translate-y-0.5 hover:shadow-luxury;
+  }
+  .btn-gold {
+    @apply btn bg-gold-gradient text-midnight-900 shadow-card
+           hover:-translate-y-0.5 hover:shadow-luxury;
+  }
+  .btn-ghost {
+    @apply btn border border-midnight-900/15 text-midnight-900 hover:bg-midnight-900/5;
+  }
+  .card {
+    @apply bg-pearl rounded-xl2 shadow-soft border border-line/60;
+  }
+  .container-lux {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Skeleton shimmer used across loading states */
+.skeleton {
+  background: linear-gradient(90deg, #EEEAE0 0%, #F7F3EA 40%, #EEEAE0 80%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s linear infinite;
+}

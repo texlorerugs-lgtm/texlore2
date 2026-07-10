@@ -1,0 +1,22 @@
+# Texlore — public robots.txt
+# Auth + admin routes are noindex'd via meta tags in the SPA. We also
+# disallow them here as a belt-and-braces measure.
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /checkout
+Disallow: /cart
+Disallow: /profile
+Disallow: /orders
+Disallow: /orders/
+Disallow: /addresses
+Disallow: /order-success
+Disallow: /order-success/
+
+# Replace with your production domain when deploying.
+Sitemap: https://your-domain.example/sitemap.xml
