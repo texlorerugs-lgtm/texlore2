@@ -4,7 +4,7 @@
  * surface errors (e.g. contact form must persist the message even if email
  * fails — see contact.service.ts in M4).
  */
-import { mailer, mailFrom } from '@/config/mailer';
+import { getMailer, mailFrom } from '@/config/mailer';
 import { env } from '@/config/env';
 import { logger } from '@/utils/logger';
 import { renderOtpEmail } from '@/templates/otp.template';
@@ -38,6 +38,7 @@ async function send(
   attachments?: Attachment[],
 ): Promise<SendResult> {
   try {
+    const mailer = await getMailer();
     const info = await mailer.sendMail({
       from: mailFrom,
       to,
