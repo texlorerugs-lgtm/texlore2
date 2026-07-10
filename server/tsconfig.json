@@ -21,10 +21,9 @@
 
     "sourceMap": true,
     "declaration": false,
-    "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"]
-    }
+  "@/*": ["./src/*"]
+}
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "logs", "scripts"]
