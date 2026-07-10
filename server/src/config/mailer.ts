@@ -1,5 +1,3 @@
-utput
-
 /**
  * Resend client for transactional email.
  *
