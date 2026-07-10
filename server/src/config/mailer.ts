@@ -1,77 +1,60 @@
 /**
- * Nodemailer SMTP transport + verification.
- * All transactional email (OTP, order confirm, etc.) flows through this.
+ * Resend client for transactional email.
  *
- * Render (and some other PaaS hosts) do not route outbound IPv6 traffic.
- * Nodemailer resolves both A and AAAA records for the SMTP host and then
- * picks one at random to connect to — so roughly half the time it picks an
- * IPv6 address, which then fails with ENETUNREACH on Render. To avoid that,
- * we resolve the SMTP host to an IPv4 address ourselves at startup and
- * connect to that literal IP, while keeping `servername` set to the real
- * hostname so TLS/SNI and certificate validation still work correctly.
+ * We use Resend's HTTPS API (port 443) instead of raw SMTP because many
+ * hosts — including Render's free tier — block outbound SMTP ports
+ * (25/465/587). An HTTPS API call is not subject to that restriction and
+ * needs no port/DNS/IPv4-vs-IPv6 workarounds.
  */
-import dns from 'node:dns/promises';
-import nodemailer, { type Transporter } from 'nodemailer';
-import type SMTPPool from 'nodemailer/lib/smtp-pool';
+import { Resend } from 'resend';
 import { env } from '@/config/env';
 import { logger } from '@/utils/logger';
 
-let cachedMailer: Transporter | null = null;
-let initPromise: Promise<Transporter> | null = null;
+export const resend = new Resend(env.RESEND_API_KEY);
 
-async function buildTransporter(): Promise<Transporter> {
-  let host = env.SMTP_HOST;
+export const mailFrom = `${env.EMAIL_FROM_NAME} <${env.EMAIL_FROM_EMAIL}>`;
 
-  try {
-    const { address } = await dns.lookup(env.SMTP_HOST, { family: 4 });
-    host = address;
-  } catch (err) {
-    logger.warn(
-      `Could not resolve an IPv4 address for SMTP host ${env.SMTP_HOST}; falling back to hostname (may hit IPv6 on some hosts).`,
-      err,
-    );
-  }
-
-  const smtpOptions: SMTPPool.Options = {
-    host,
-    port: env.SMTP_PORT,
-    secure: env.SMTP_SECURE, // true for 465, false for 587/25
-    auth: {
-      user: env.SMTP_USER,
-      pass: env.SMTP_PASS,
-    },
-    pool: true,
-    maxConnections: 3,
-    maxMessages: 100,
-    tls: {
-      servername: env.SMTP_HOST,
-    },
-  };
-
-  return nodemailer.createTransport(smtpOptions);
-}
-
-/** Returns the shared transporter, creating (and IPv4-resolving) it on first call. */
-export async function getMailer(): Promise<Transporter> {
-  if (cachedMailer) return cachedMailer;
-  if (!initPromise) {
-    initPromise = buildTransporter().then((t) => {
-      cachedMailer = t;
-      return t;
-    });
-  }
-  return initPromise;
-}
-
-export const mailFrom = `"${env.SMTP_FROM_NAME}" <${env.SMTP_FROM_EMAIL}>`;
-
+/**
+ * Resend has no separate "verify credentials" call like SMTP's mailer.verify().
+ * We do a lightweight sanity check instead: list domains, which requires a
+ * valid API key and confirms the key is well-formed and accepted by Resend.
+ */
 export async function verifyMailer(): Promise<void> {
   try {
-    const mailer = await getMailer();
-    await mailer.verify();
-    logger.info('\u2705 SMTP connected');
+    const { error } = await resend.domains.list();
+    if (error) throw new Error(error.message);
+    logger.info('\u2705 Resend connected');
   } catch (err) {
-    logger.error('SMTP verification failed. Check SMTP_* env vars.', err);
+    logger.error('Resend verification failed. Check RESEND_API_KEY.', err);
     throw err;
   }
 }
+Done
+server/src/services/email.service.ts — sirf top ka import line aur send() function badalna hai:
+
+
+Show updated email.service.ts top section
+Show updated email.service.ts top section
+Sirf import { getMailer, mailFrom } → import { resend, mailFrom } line change karo, aur send() function ka poora body upar dikhaye gaye code se replace karo (jahan const mailer = await getMailer()... tha).
+
+server/.env.example — SMTP section ki jagah:
+
+env
+# --- Resend (transactional email, required) ---
+RESEND_API_KEY=re_your_api_key
+EMAIL_FROM_NAME=Texlore
+EMAIL_FROM_EMAIL=onboarding@resend.dev
+3. Push karo
+powershell
+git add .
+git commit -m "feat: replace SMTP with Resend HTTP API (Render free tier blocks SMTP ports)"
+git push
+4. Render par env vars update karo
+Settings → Environment mein jao:
+
+Delete karo: SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS, SMTP_FROM_NAME, SMTP_FROM_EMAIL
+Add karo: RESEND_API_KEY (Resend dashboard se copy kiya hua), EMAIL_FROM_NAME=Texlore, EMAIL_FROM_EMAIL=onboarding@resend.dev
+Deploy hone ke baad logs mein ✅ Resend connected dikhna chahiye. Screenshot bhej dena confirm karne ke liye.
+
+
+

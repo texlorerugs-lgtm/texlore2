@@ -40,16 +40,9 @@ const envSchema = z.object({
   CLOUDINARY_UPLOAD_FOLDER: z.string().default('texlore'),
 
   // SMTP
-  SMTP_HOST: z.string().min(1),
-  SMTP_PORT: z.coerce.number().int().positive(),
-  SMTP_SECURE: z
-  .string()
-  .default("false")
-  .transform((v) => v.toLowerCase() === "true"),
-  SMTP_USER: z.string().min(1),
-  SMTP_PASS: z.string().min(1),
-  SMTP_FROM_NAME: z.string().default('Texlore'),
-  SMTP_FROM_EMAIL: z.string().email(),
+  RESEND_API_KEY: z.string().min(1, 'RESEND_API_KEY is required'),
+EMAIL_FROM_NAME: z.string().default('Texlore'),
+EMAIL_FROM_EMAIL: z.string().email(),
 
   // Razorpay
   RAZORPAY_KEY_ID: z.string().min(1),

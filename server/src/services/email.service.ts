@@ -1,10 +1,10 @@
 /**
- * Email service. Wraps Nodemailer with logging + retry-on-transient-failure.
+ * Email service. Wraps Resend's HTTP API with logging + structured results.
  * Every call returns a structured result so callers can decide whether to
  * surface errors (e.g. contact form must persist the message even if email
  * fails — see contact.service.ts in M4).
  */
-import { getMailer, mailFrom } from '@/config/mailer';
+import { resend, mailFrom } from '@/config/mailer';
 import { env } from '@/config/env';
 import { logger } from '@/utils/logger';
 import { renderOtpEmail } from '@/templates/otp.template';
@@ -38,17 +38,25 @@ async function send(
   attachments?: Attachment[],
 ): Promise<SendResult> {
   try {
-    const mailer = await getMailer();
-    const info = await mailer.sendMail({
+    const { data, error } = await resend.emails.send({
       from: mailFrom,
       to,
       subject,
       html,
       text,
-      attachments,
+      attachments: attachments?.map((a) => ({
+        filename: a.filename,
+        content: a.content,
+        contentType: a.contentType,
+      })),
     });
-    logger.info(`Email sent to ${to} (${subject})`, { messageId: info.messageId });
-    return { ok: true, messageId: info.messageId };
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    logger.info(`Email sent to ${to} (${subject})`, { messageId: data?.id });
+    return { ok: true, messageId: data?.id };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     logger.error(`Email send failed to ${to} (${subject})`, { error: msg });
