@@ -1,3 +1,5 @@
+utput
+
 /**
  * Resend client for transactional email.
  *
@@ -15,19 +17,15 @@ export const resend = new Resend(env.RESEND_API_KEY);
 export const mailFrom = env.EMAIL_FROM_NAME + ' <' + env.EMAIL_FROM_EMAIL + '>';
 
 /**
- * Resend has no separate "verify credentials" call like SMTP's mailer.verify().
- * We do a lightweight sanity check instead: list domains, which requires a
- * valid API key and confirms the key is well-formed and accepted by Resend.
+ * Resend has no lightweight "verify credentials" endpoint that works with a
+ * restricted, send-only API key (the recommended key type). We simply
+ * confirm an API key was provided; the real test is the first actual send,
+ * whose result is always logged by email.service.ts.
  */
 export async function verifyMailer(): Promise<void> {
-  try {
-    const result = await resend.domains.list();
-    if (result.error) {
-      throw new Error(result.error.message);
-    }
-    logger.info('Resend connected');
-  } catch (err) {
-    logger.error('Resend verification failed. Check RESEND_API_KEY.', err);
-    throw err;
+  if (!env.RESEND_API_KEY) {
+    logger.error('RESEND_API_KEY is not set.');
+    throw new Error('RESEND_API_KEY is not set');
   }
+  logger.info('Resend client ready');
 }
