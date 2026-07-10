@@ -1,3 +1,7 @@
+/**
+ * /api/v1/auth  — user authentication routes.
+ * All state-changing endpoints use the auth rate limiter.
+ */
 import { Router } from 'express';
 import { authRateLimiter, otpRateLimiter } from '@/middlewares/rateLimiter';
 import { validate } from '@/middlewares/validate';
