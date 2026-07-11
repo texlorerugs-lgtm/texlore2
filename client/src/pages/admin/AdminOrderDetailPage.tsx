@@ -250,7 +250,7 @@ export default function AdminOrderDetailPage(): JSX.Element {
             pre-shipping order restores stock automatically.
           </p>
           <div className="mt-4 pt-4 border-t border-line/60 text-xs text-charcoal-400">
-            <Link to="/admin/orders" className="hover:text-midnight-900">
+            <Link to="/ayan-khan/orders" className="hover:text-midnight-900">
               ← Back to all orders
             </Link>
           </div>

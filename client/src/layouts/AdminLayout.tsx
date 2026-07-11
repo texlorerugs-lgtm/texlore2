@@ -153,7 +153,7 @@ function SidebarInner({
   return (
     <>
       <div className="flex items-center justify-between px-6 h-16 border-b border-ivory/10">
-        <Link to="/admin/dashboard" className="flex items-center gap-2">
+        <Link to="/ayan-khan/dashboard" className="flex items-center gap-2">
           <Logo variant="light" />
           <span className="text-[10px] tracking-widest text-gold-500 mt-1">ADMIN</span>
         </Link>
@@ -186,7 +186,7 @@ function SidebarInner({
       </nav>
       <div className="border-t border-ivory/10 p-3">
         <NavLink
-          to="/admin/profile"
+          to="/ayan-khan/profile"
           className={({ isActive }) =>
             'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ' +
             (isActive

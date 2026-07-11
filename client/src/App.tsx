@@ -97,7 +97,7 @@ function RequireAdmin({ children }: { children: JSX.Element }): JSX.Element {
   const admin = useAppSelector((s) => s.auth.admin);
   const location = useLocation();
   if (!admin) {
-    return <Navigate to="/admin/login" replace state={{ from: location.pathname }} />;
+    return <Navigate to="/ayan-khan/login" replace state={{ from: location.pathname }} />;
   }
   return children;
 }
@@ -142,7 +142,7 @@ function Router(): JSX.Element {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
         {/* Admin */}
-        <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route path="/ayan-khan/login" element={<AdminLoginPage />} />
         <Route
           element={
             <RequireAdmin>
@@ -150,18 +150,18 @@ function Router(): JSX.Element {
             </RequireAdmin>
           }
         >
-          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-          <Route path="/admin/categories" element={<AdminCategoriesPage />} />
-          <Route path="/admin/products" element={<AdminProductsPage />} />
-          <Route path="/admin/orders" element={<AdminOrdersPage />} />
-          <Route path="/admin/orders/:id" element={<AdminOrderDetailPage />} />
-          <Route path="/admin/coupons" element={<AdminCouponsPage />} />
-          <Route path="/admin/customers" element={<AdminCustomersPage />} />
-          <Route path="/admin/messages" element={<AdminMessagesPage />} />
-          <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
-          <Route path="/admin/settings" element={<AdminSettingsPage />} />
-          <Route path="/admin/profile" element={<AdminProfilePage />} />
+          <Route path="/ayan-khan" element={<Navigate to="/ayan-khan/dashboard" replace />} />
+          <Route path="/ayan-khan/dashboard" element={<AdminDashboardPage />} />
+          <Route path="/ayan-khan/categories" element={<AdminCategoriesPage />} />
+          <Route path="/ayan-khan/products" element={<AdminProductsPage />} />
+          <Route path="/ayan-khan/orders" element={<AdminOrdersPage />} />
+          <Route path="/ayan-khan/orders/:id" element={<AdminOrderDetailPage />} />
+          <Route path="/ayan-khan/coupons" element={<AdminCouponsPage />} />
+          <Route path="/ayan-khan/customers" element={<AdminCustomersPage />} />
+          <Route path="/ayan-khan/messages" element={<AdminMessagesPage />} />
+          <Route path="/ayan-khan/analytics" element={<AdminAnalyticsPage />} />
+          <Route path="/ayan-khan/settings" element={<AdminSettingsPage />} />
+          <Route path="/ayan-khan/profile" element={<AdminProfilePage />} />
         </Route>
       </Routes>
     </Suspense>

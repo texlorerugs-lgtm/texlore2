@@ -145,7 +145,7 @@ export default function AdminDashboardPage(): JSX.Element {
               <div className="flex items-center justify-between px-5 py-4 border-b border-line/60">
                 <h2 className="font-display text-lg text-midnight-900">Recent orders</h2>
                 <Link
-                  to="/admin/orders"
+                  to="/ayan-khan/orders"
                   className="text-xs text-midnight-900 hover:text-gold-600"
                 >
                   View all →
@@ -190,7 +190,7 @@ export default function AdminDashboardPage(): JSX.Element {
                 <div className="flex items-center justify-between px-5 py-4 border-b border-line/60">
                   <h2 className="font-display text-lg text-midnight-900">Top-selling</h2>
                   <Link
-                    to="/admin/analytics"
+                    to="/ayan-khan/analytics"
                     className="text-xs text-midnight-900 hover:text-gold-600"
                   >
                     Analytics →
@@ -234,7 +234,7 @@ export default function AdminDashboardPage(): JSX.Element {
                     Low stock
                   </h2>
                   <Link
-                    to="/admin/products"
+                    to="/ayan-khan/products"
                     className="text-xs text-midnight-900 hover:text-gold-600"
                   >
                     Manage →
