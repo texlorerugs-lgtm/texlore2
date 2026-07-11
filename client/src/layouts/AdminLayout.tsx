@@ -24,15 +24,15 @@ import { adminAuthApi } from '@/services/admin-auth.service';
 import { Logo } from '@/components/Logo';
 
 const NAV = [
-  { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/admin/categories', label: 'Categories', icon: FolderTree },
-  { to: '/admin/products', label: 'Products', icon: Package },
-  { to: '/admin/orders', label: 'Orders', icon: ShoppingCart },
-  { to: '/admin/coupons', label: 'Coupons', icon: Megaphone },
-  { to: '/admin/customers', label: 'Customers', icon: Users },
-  { to: '/admin/messages', label: 'Messages', icon: MessageSquare },
-  { to: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
-  { to: '/admin/settings', label: 'Settings', icon: Settings },
+  { to: '/ayan-khan/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/ayan-khan/categories', label: 'Categories', icon: FolderTree },
+  { to: '/ayan-khan/products', label: 'Products', icon: Package },
+  { to: '/ayan-khan/orders', label: 'Orders', icon: ShoppingCart },
+  { to: '/ayan-khan/coupons', label: 'Coupons', icon: Megaphone },
+  { to: '/ayan-khan/customers', label: 'Customers', icon: Users },
+  { to: '/ayan-khan/messages', label: 'Messages', icon: MessageSquare },
+  { to: '/ayan-khan/analytics', label: 'Analytics', icon: BarChart3 },
+  { to: '/ayan-khan/settings', label: 'Settings', icon: Settings },
 ] as const;
 
 /**
@@ -57,7 +57,7 @@ export default function AdminLayout(): JSX.Element {
     }
     dispatch(clearAdmin());
     toast.success('Signed out');
-    navigate('/admin/login', { replace: true });
+    navigate('/ayan-khan/login', { replace: true });
   }
 
   return (

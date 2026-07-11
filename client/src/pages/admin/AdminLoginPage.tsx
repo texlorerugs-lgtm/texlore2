@@ -78,7 +78,7 @@ export default function AdminLoginPage(): JSX.Element {
       const { admin, accessToken } = await adminAuthApi.verify({ email, code: otp });
       dispatch(setAdmin({ admin, accessToken }));
       toast.success('Admin access granted');
-      navigate('/admin/dashboard', { replace: true });
+      navigate('/ayan-khan/dashboard', { replace: true });
     } catch (err: unknown) {
       const msg =
         (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
